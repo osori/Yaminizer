@@ -66,16 +66,23 @@ $('#hunminize').click(function() {
     }
 });
 
-$("#input_text").keyup(function(){
-	var input_text = $("#input_text").val();
+$("#input_text").keyup(translate);
+
+$('.collection-item').click(function(){
+    $('#input_text').text(this.text);
+    Materialize.updateTextFields();
+    translate();
+});
+
+function translate(){
+    var input_text = $("#input_text").val();
     var result = translate_mode == 0 ? yaminize(input_text) : hunminize(input_text);
-	$("#result").val(result);
-	$('#result').trigger('autoresize');
-})
+    $("#result").val(result);
+    $('#result').trigger('autoresize');
+}
 
 function swapIOText(){
     var temp = $("#input_text").val();
-    console.log(temp);
     $("#input_text").val($("#result").val());
     $("#result").val(temp);
 }
